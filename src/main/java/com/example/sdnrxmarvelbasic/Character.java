@@ -9,27 +9,25 @@ import org.neo4j.springframework.data.core.schema.Relationship;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.neo4j.springframework.data.core.schema.Relationship.Direction.INCOMING;
-
 @Node
 public class Character {
     @Id
     @GeneratedValue
     private Long id;
 
-    private String name, description, thumbnail;
+    private String name, description, image;
 
-    @Relationship(type = "INCLUDES", direction = INCOMING)
+    @Relationship(type = "APPEARS_IN")
     @JsonIgnoreProperties("characters")
-    private List<ComicIssue> characterComics = new ArrayList<>();
+    private List<Comic> characterComics = new ArrayList<>();
 
     public Character() {
     }
 
-    public Character(String name, String description, String thumbnail) {
+    public Character(String name, String description, String image) {
         this.name = name;
         this.description = description;
-        this.thumbnail = thumbnail;
+        this.image = image;
     }
 
     public Long getId() {
@@ -52,19 +50,19 @@ public class Character {
         this.description = description;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getImage() {
+        return image;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public List<ComicIssue> getCharacterComics() {
+    public List<Comic> getCharacterComics() {
         return characterComics;
     }
 
-    public void setCharacterComics(List<ComicIssue> characterComics) {
+    public void setCharacterComics(List<Comic> characterComics) {
         this.characterComics = characterComics;
     }
 }

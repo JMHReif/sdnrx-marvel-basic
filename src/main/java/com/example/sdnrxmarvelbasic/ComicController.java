@@ -18,12 +18,12 @@ public class ComicController {
     }
 
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    Flux<ComicIssue> getComics() {
+    Flux<Comic> getComics() {
         return comicRepo.findAll();
     }
 
-    @GetMapping("/{name}")
-    Mono<ComicIssue> getComicIssueByName(@PathVariable String name) {
-        return comicRepo.getComicIssueByName(name);
+    @GetMapping("/{title}")
+    Mono<Comic> getComicIssueByName(@PathVariable String title) {
+        return comicRepo.getComicByTitle(title);
     }
 }
