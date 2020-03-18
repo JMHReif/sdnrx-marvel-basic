@@ -17,13 +17,14 @@ public class ComicController {
         this.comicRepo = comicRepo;
     }
 
-    @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    Flux<Comic> getComics() {
+    //@GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping
+    Flux<ComicIssue> getComics() {
         return comicRepo.findAll();
     }
 
-    @GetMapping("/{title}")
-    Mono<Comic> getComicIssueByName(@PathVariable String title) {
-        return comicRepo.getComicByTitle(title);
+    @GetMapping("/{name}")
+    Mono<ComicIssue> getComicIssueByName(@PathVariable String name) {
+        return comicRepo.getComicIssueByName(name);
     }
 }

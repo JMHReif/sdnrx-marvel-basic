@@ -3,7 +3,7 @@ package com.example.sdnrxmarvelbasic;
 import org.neo4j.springframework.data.repository.ReactiveNeo4jRepository;
 import reactor.core.publisher.Mono;
 
-public interface ComicRepo extends ReactiveNeo4jRepository<Comic, Long> {
+public interface ComicRepo extends ReactiveNeo4jRepository<ComicIssue, Long> {
 
-    Mono<Comic> getComicByTitle(String title);
+    Mono<ComicIssue> getComicIssueByName(String name);
 }

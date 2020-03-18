@@ -9,28 +9,26 @@ import org.neo4j.springframework.data.core.schema.Relationship;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.neo4j.springframework.data.core.schema.Relationship.Direction.INCOMING;
-
 @Node
-public class Comic {
+public class ComicIssue {
     @Id
     @GeneratedValue
     private Long id;
 
-    private String title, image;
+    private String name, thumbnail;
     private Integer pageCount;
     private Double issueNumber;
 
-    @Relationship(type = "APPEARS_IN", direction = INCOMING)
+    @Relationship(type = "INCLUDES")
     @JsonIgnoreProperties("characterComics")
     public List<Character> characters = new ArrayList<>();
 
-    public Comic() {
+    public ComicIssue() {
     }
 
-    public Comic(String title, String image, Integer pageCount, Double issueNumber) {
-        this.title = title;
-        this.image = image;
+    public ComicIssue(String name, String thumbnail, Integer pageCount, Double issueNumber) {
+        this.name = name;
+        this.thumbnail = thumbnail;
         this.pageCount = pageCount;
         this.issueNumber = issueNumber;
     }
@@ -39,20 +37,20 @@ public class Comic {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public Integer getPageCount() {
