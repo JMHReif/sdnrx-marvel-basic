@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
+
 @RestController
 @RequestMapping("/characters")
 public class CharacterController {
@@ -19,7 +21,7 @@ public class CharacterController {
 
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<Character> getCharacters() {
-        return characterRepo.findAll();
+        return characterRepo.findAll().delayElements(Duration.ofSeconds(1));
     }
 
     @GetMapping("/{name}")

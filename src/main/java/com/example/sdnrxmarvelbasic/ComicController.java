@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
+
 @RestController
 @RequestMapping("/comics")
 public class ComicController {
@@ -17,10 +19,9 @@ public class ComicController {
         this.comicRepo = comicRepo;
     }
 
-    //@GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    @GetMapping
+    @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<ComicIssue> getComics() {
-        return comicRepo.findAll();
+        return comicRepo.findAll().delayElements(Duration.ofSeconds(1));
     }
 
     @GetMapping("/{name}")
