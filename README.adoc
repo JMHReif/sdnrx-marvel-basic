@@ -1,0 +1,48 @@
+= Spring Data Neo4j Example Project
+
+This project uses the Marvel comic data set to demonstrate using Spring Data and Neo4j together.
+The following components are part of the project:
+
+1. Neo4j database - https://dev.neo4j.com/sandbox[sandbox^], https://dev.neo4j.com/aura[Aura free tier^], or https://dev.neo4j.com/desktop[local instance].
+2. Marvel comic data set loaded to Neo4j - Cypher statements in this repository (requires API key).
+3. Spring Boot application using Spring Data Neo4j (SDN) - https://spring.io/projects/spring-data-neo4j[Spring Data project^] for integration with Neo4j.
+
+The application is a read-only interface to query and explore the data.
+It is using the reactive capabilities of Spring Data Neo4j. For imperative functionality, please see the https://github.com/JMHReif/sdn-marvel-basic[related Github project^].
+
+== Data set
+
+"Data provided by Marvel. © 2014 Marvel"
+
+More details on getting an API key to load the data can be found on https://github.com/JMHReif/graph-demo-datasets/tree/main/marvel-comics[another Github repository^].
+Note that this project uses a subset (only characters and comic issues) of the full Marvel data set.
+
+== Data load
+
+Create an instance of Neo4j and go to the https://developer.marvel.com/[Marvel API] to create an account and request an API key.
+Once that is granted, copy/paste the statements from the `marvel-load-data.cypher` file in this repository (substituting your keys in the first statement to set parameters).
+Clone this repository from Github, update the credentials in this project's `application.properties` file to match those for your database instance, then run the project.
+
+== Example REST API calls
+
+* Characters
+[source,bash]
+----
+http://localhost:8080/characters
+
+http://localhost:8080/characters/Captain%20America
+----
+
+* ComicIssues
+[source,bash]
+----
+http://localhost:8080/comics
+
+http://localhost:8080/comics/Captain%20America%20(1968)%20%23132
+----
+
+[NOTE]
+--
+Methods with a `Flux` as the return type will continue outputting results until it returns every object found.
+To stop the request before it finishes displaying the output, click the `X` in the browser or use `Cntrl + C` at the command line.
+--

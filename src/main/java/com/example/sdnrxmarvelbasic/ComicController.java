@@ -21,7 +21,7 @@ public class ComicController {
 
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<ComicIssue> getComics() {
-        return comicRepo.findAll().delayElements(Duration.ofSeconds(1));
+        return comicRepo.findAllComics().delayElements(Duration.ofSeconds(1));
     }
 
     @GetMapping("/{name}")

@@ -20,9 +20,8 @@ public class CharacterController {
     }
 
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    //@GetMapping
-    Flux<Character> getCharacters() {
-        return characterRepo.findAll().delayElements(Duration.ofSeconds(1));
+    Flux<Character> findAllCharacters() {
+        return characterRepo.findAllCharacters().delayElements(Duration.ofSeconds(1));
     }
 
     @GetMapping("/{name}")
