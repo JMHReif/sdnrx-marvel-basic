@@ -26,7 +26,7 @@ WITH rel
 RETURN count(rel);
 
 //2. JSON load queries:
-WITH "https://raw.githubusercontent.com/JMHReif/sdnrx-marvel-basic/master/src/main/resources/marvel-data-small.csv" as file
+WITH "https://raw.githubusercontent.com/JMHReif/sdnrx-marvel-basic/master/src/main/resources/marvel-data-small.json" as file
 CALL apoc.load.json(file) YIELD value
 WITH value
 WHERE value.type = "node"
@@ -34,7 +34,7 @@ CALL apoc.merge.node([value.labels],{id: value.id},{marvelId: value.properties.i
 YIELD node
 RETURN count(node);
 
-WITH "https://raw.githubusercontent.com/JMHReif/sdnrx-marvel-basic/master/src/main/resources/marvel-data-small.csv" as file
+WITH "https://raw.githubusercontent.com/JMHReif/sdnrx-marvel-basic/master/src/main/resources/marvel-data-small.json" as file
 CALL apoc.load.json(file) YIELD value
 WITH value
   WHERE value.type = "relationship"
